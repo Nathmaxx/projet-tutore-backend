@@ -2,7 +2,7 @@ require('dotenv').config();
 import express from 'express'
 import cors from 'cors'
 import { createServer } from 'http'
-// import api from './api'
+import api from './api'
 import { getPool } from './api/config/dbsql'
 
 const app = express()
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'API PTUT is responding', code: 200 })
 });
 
-// app.use('/ptut/api/v1', api)
+app.use('/ptut/api/v1', api)
 
 const server = createServer(app)
 
