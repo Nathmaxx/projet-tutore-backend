@@ -16,9 +16,10 @@ export namespace ConsommationsHelper {
         return await executeQuery(sql, [id]);
     }
 
-    export const createConsommation = async (consommation: ConsommationsType) : Promise<ConsommationsType[]> => {
+    export const createConsommation = async (consommation: ConsommationsType) : Promise<boolean> => {
         const sql = `INSERT INTO consommations SET ?`
-        return await executeQuery(sql, [consommation]);
+        const result = await executeQuery(sql, [consommation]);
+        return result.affectedRows > 0;
     }
 
     export const updateConsommation = async (id: string, consommation: ConsommationsType) : Promise<ConsommationsType[]> => {

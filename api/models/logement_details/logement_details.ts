@@ -1,6 +1,6 @@
 export type LogementDetailsType = {
-  id_logement_details: string;
-  id_parcelle?: string;
+  id_logement_details?: string;
+  id_parcelle: string;
   nb_adr_theorique_parcelle?: number;
   majic_annee_logement_ancien?: string;
   majic_annee_logement_recent?: string;
