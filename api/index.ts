@@ -14,5 +14,5 @@ router.use('/parcelles', parcelles);
 router.use('/seed', seed);
 router.use('/consommations_industrielles', consommations_industrielles);
 router.use('/consommations_residentielles', consommations_residentielles);
-router.use('/consommations_territoriales', consommations_tertiaires );
+router.use('/consommations_tertiaires', consommations_tertiaires );
 export default router;
