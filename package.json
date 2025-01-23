@@ -21,7 +21,6 @@
   "homepage": "https://github.com/Nathmaxx/projet-tutore-backend#readme",
   "dependencies": {
     "@types/express": "^5.0.0",
-    "@types/node": "^22.10.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -32,6 +31,8 @@
     "uuid": "^11.0.5"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17"
+    "@types/cors": "^2.8.17",
+    "@types/node": "^22.10.9",
+    "typescript": "^5.7.3"
   }
 }
