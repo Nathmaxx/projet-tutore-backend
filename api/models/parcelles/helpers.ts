@@ -4,9 +4,10 @@ import { ParcellesType } from "./parcelles";
 export namespace ParcellesHelper {
   
   // insert into Parcelles(adresse,commune,iris) values ('182 avenue roger salengro', 'Villeurbanne','bah iris');
-  export const getParcelles = async () : Promise<ParcellesType[]> => {
+  export const getParcelles = async () : Promise<Boolean> => {
     const sql = `SELECT * FROM Parcelles`
-    return await executeQuery(sql);
+    const result = await executeQuery(sql);
+    return result.affectedRows > 0;
   }
 
   export const getParcelleById = async (id: number) : Promise<ParcellesType[]> => {

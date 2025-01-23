@@ -5,9 +5,10 @@ import { ConsommationsType } from "./consommations";
 export namespace ConsommationsHelper {
   
   // insert into Parcelles(adresse,commune,iris) values ('182 avenue roger salengro', 'Villeurbanne','bah iris');
-    export const getConsommations = async () : Promise<ConsommationsType[]> => {
+    export const getConsommations = async () : Promise<boolean> => {
         const sql = `SELECT * FROM Consommations`
-        return await executeQuery(sql);
+        const result = await executeQuery(sql)
+        return result.affectedRows > 0;
     }
 
     export const getConsommationById = async (id: string) : Promise<ConsommationsType[]> => {

@@ -8,7 +8,7 @@ router.get("/", checkBearerToken, async(req: Request, res: Response) => {
 
   const parcelles = await ParcellesHelper.getParcelles();
 
-  if(parcelles?.length === 0) {
+  if(!parcelles) {
     res.status(404).json({ error: "No parcelles found" });
     return;
   }

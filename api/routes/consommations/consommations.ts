@@ -7,14 +7,13 @@ const router = Router();
 router.get("/", checkBearerToken, async (req: Request, res: Response) => {
     const consommations = await ConsommationsHelper.getConsommations();
   
-    if (consommations?.length === 0) {
+    if (!consommations) {
       res.status(404).json({ error: "No consommations found" });
       return;
     }
   
     res.status(200).json(consommations);
   });
-
   
   router.get("/:id", checkBearerToken, async (req: Request, res: Response) => {
     const id = req.params.id;
