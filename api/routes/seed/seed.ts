@@ -19,7 +19,7 @@ router.get("/", async(req: Request, res: Response) => {
   const annnee = 2020;
   const filteredCommune = ["Lyon 1er Arrondissement", "Lyon 2e Arrondissement", "Lyon 3e Arrondissement", "Lyon 4e Arrondissement", "Lyon 5e Arrondissement", "Lyon 6e Arrondissement", "Lyon 7e Arrondissement", "Lyon 8e Arrondissement", "Lyon 9e Arrondissement"]
 
-  const response = await fetch(`https://data.grandlyon.com/fr/datapusher/ws/rdata/nrj_energie.nrjcad_parcelles_${annnee}/all.json?maxfeatures=500&start=1&filename=consommations-energetiques-2020-a-parcelle-territoire-metropole-lyon`)
+  const response = await fetch(`https://data.grandlyon.com/fr/datapusher/ws/rdata/nrj_energie.nrjcad_parcelles_${annnee}/all.json?maxfeatures=-1&start=1&filename=consommations-energetiques-2020-a-parcelle-territoire-metropole-lyon`)
   const data = await response.json();
   
   const Lyon1erArrondissement = data.values
@@ -38,7 +38,27 @@ router.get("/", async(req: Request, res: Response) => {
     .filter((element: any) => element.commune === "Lyon 4e Arrondissement")
     .slice(0, 300)
 
-  const LyonArrondissment = Lyon1erArrondissement.concat(Lyon2erArrondissement, Lyon3erArrondissement, Lyon4erArrondissement);
+  const Lyon5erArrondissement = data.values
+    .filter((element: any) => element.commune === "Lyon 5e Arrondissement")
+    .slice(0, 300)
+
+  const Lyon6erArrondissement = data.values
+    .filter((element: any) => element.commune === "Lyon 6e Arrondissement")
+    .slice(0, 300)
+
+  const Lyon7erArrondissement = data.values
+    .filter((element: any) => element.commune === "Lyon 7e Arrondissement")
+    .slice(0, 300)
+
+  const Lyon8erArrondissement = data.values
+    .filter((element: any) => element.commune === "Lyon 8e Arrondissement")
+    .slice(0, 300)
+
+  const Lyon9erArrondissement = data.values
+    .filter((element: any) => element.commune === "Lyon 9e Arrondissement")
+    .slice(0, 300)
+
+  const LyonArrondissment = Lyon1erArrondissement.concat(Lyon2erArrondissement, Lyon3erArrondissement, Lyon4erArrondissement, Lyon5erArrondissement, Lyon6erArrondissement, Lyon7erArrondissement, Lyon8erArrondissement, Lyon9erArrondissement);
   
   LyonArrondissment
   .filter((element: any) => filteredCommune.includes(element.commune))
