@@ -6,22 +6,22 @@ export namespace ConsommationsResidentiellesHelper {
   
   // insert into Parcelles(adresse,commune,iris) values ('182 avenue roger salengro', 'Villeurbanne','bah iris');
     export const getConsommationsResidentielles = async () : Promise<ConsommationsResidentiellesType[]> => {
-        const sql = `SELECT * FROM Consommations_Residentielles`
+        const sql = `SELECT * FROM consommations_residentielles`
         return await executeQuery(sql);
     }
 
     export const getConsommationResidentiellesById = async (id: number) : Promise<ConsommationsResidentiellesType[]> => {
-        const sql = `SELECT * FROM Consommations_Residentielles WHERE id = ?`
+        const sql = `SELECT * FROM consommations_residentielles WHERE id = ?`
         return await executeQuery(sql, [id]);
     }
 
     export const createConsommationResidentielle = async (consommation: ConsommationsResidentiellesType) : Promise<ConsommationsResidentiellesType[]> => {
-        const sql = `INSERT INTO Consommations_Residentielles SET ?`
+        const sql = `INSERT INTO consommations_residentielles SET ?`
         return await executeQuery(sql, [consommation]);
     }
 
     export const updateConsommationResidentielle = async (id: string, consommation: ConsommationsResidentiellesType) : Promise<ConsommationsResidentiellesType[]> => {
-        const sql = `UPDATE Consommations_Residentielles SET ? WHERE id = ?`
+        const sql = `UPDATE consommations_residentielles SET ? WHERE id = ?`
         return await executeQuery(sql, [consommation, id]);
     }
   }

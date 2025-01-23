@@ -3,25 +3,25 @@ import { ParcellesType } from "./parcelles";
 
 export namespace ParcellesHelper {
   
-  // insert into Parcelles(adresse,commune,iris) values ('182 avenue roger salengro', 'Villeurbanne','bah iris');
+  // insert into parcelles(id_parcelle, adresse,commune,iris) values ("1", '182 avenue roger salengro', 'Villeurbanne','bah iris');
   export const getParcelles = async () : Promise<Boolean> => {
-    const sql = `SELECT * FROM Parcelles`
+    const sql = `SELECT * FROM parcelles`
     const result = await executeQuery(sql);
     return result.affectedRows > 0;
   }
 
   export const getParcelleById = async (id: number) : Promise<ParcellesType[]> => {
-    const sql = `SELECT * FROM Parcelles WHERE id = ?`
+    const sql = `SELECT * FROM parcelles WHERE id = ?`
     return await executeQuery(sql, [id]);
   }
 
   export const createParcelle = async (parcelle: ParcellesType) : Promise<ParcellesType[]> => {
-    const sql = `INSERT INTO Parcelles SET ?`
+    const sql = `INSERT IGNORE INTO parcelles SET ?`
     return await executeQuery(sql, [parcelle]);
   }
 
   export const updateParcelle = async (id: string, parcelle: ParcellesType) : Promise<ParcellesType[]> => {
-    const sql = `UPDATE Parcelles SET ? WHERE id = ?`
+    const sql = `UPDATE parcelles SET ? WHERE id = ?`
     return await executeQuery(sql, [parcelle, id]);
   }
 }

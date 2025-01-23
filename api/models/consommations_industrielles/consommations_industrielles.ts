@@ -8,5 +8,6 @@ export type ConsommationsIndustriellesType = {
     i_mwh_ep?: number;
     i_pdl_elec?: number;
     i_pdl_gaz?: number;
+    annee?: number;
   };
   

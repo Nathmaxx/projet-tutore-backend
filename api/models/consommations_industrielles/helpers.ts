@@ -4,25 +4,25 @@ import { ConsommationsIndustriellesType } from "./consommations_industrielles";
 export namespace ConsommationsIndustriellesHelper {
   // Récupérer toutes les consommations industrielles
   export const getConsommationsIndustrielles = async (): Promise<ConsommationsIndustriellesType[]> => {
-    const sql = `SELECT * FROM Consommations_Industrielles`;
+    const sql = `SELECT * FROM consommations_industrielles`;
     return await executeQuery(sql);
   };
 
   // Récupérer une consommation industrielle par son ID
   export const getConsommationIndustrielleById = async (id: string): Promise<ConsommationsIndustriellesType[]> => {
-    const sql = `SELECT * FROM Consommations_Industrielles WHERE id_consommation_industrielle = ?`;
+    const sql = `SELECT * FROM consommations_industrielles WHERE id_consommation_industrielle = ?`;
     return await executeQuery(sql, [id]);
   };
 
   // Créer une nouvelle consommation industrielle
   export const createConsommationIndustrielle = async (consommation: ConsommationsIndustriellesType): Promise<ConsommationsIndustriellesType[]> => {
-    const sql = `INSERT INTO Consommations_Industrielles SET ?`;
+    const sql = `INSERT INTO consommations_industrielles SET ?`;
     return await executeQuery(sql, [consommation]);
   };
 
   // Mettre à jour une consommation industrielle existante
   export const updateConsommationIndustrielle = async (id: string, consommation: ConsommationsIndustriellesType): Promise<ConsommationsIndustriellesType[]> => {
-    const sql = `UPDATE Consommations_Industrielles SET ? WHERE id_consommation_industrielle = ?`;
+    const sql = `UPDATE consommations_industrielles SET ? WHERE id_consommation_industrielle = ?`;
     return await executeQuery(sql, [consommation, id]);
   };
 }

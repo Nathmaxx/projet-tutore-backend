@@ -9,5 +9,6 @@ export type ConsommationsType = {
     pdl_elec?: number;
     pdl_gaz?: number;
     nb_adresses_livrees?: number;
+    annee?: number;
   };
   

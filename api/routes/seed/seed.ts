@@ -12,20 +12,14 @@ router.get("/", async(req: Request, res: Response) => {
 
   data.values.forEach(async (element: any) => {
     // console.log("element", element);
-    const parcelleId = uuidv4();
     const parcelleObject : ParcellesType = {
-      id_parcelle: parcelleId,
-      adresse: element.adresse,
+      id_parcelle: element.parcelle,
+      adresse: element.adresses,
       insee: element.insee,
       commune: element.commune,
-      parcelle: element.parcelle,
-      nb_adr_theorique_parcelle: element.nb_adr_theorique_parcelle,
       iris: element.iris,
-      majic_annee_logement_ancien: element.majic_annee_logement_ancien,
-      majic_annee_logement_recent: element.majic_annee_logement_recent,
-      majic_nb_logement_parcelle: element.majic_nb_logement_parcelle,
-      majic_surf_habitable_parcelle: element.majic_surf_habitable_parcelle,
-      gid: element.gid
+      gid: element.gid,
+      coordinates: '{ "lat": "45.764043", "lng": "4.835659" }'
     }
     
     const parcelleCreated = await ParcellesHelper.createParcelle(parcelleObject);
