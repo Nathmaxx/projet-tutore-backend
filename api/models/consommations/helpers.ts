@@ -2,7 +2,7 @@
 import { executeQuery } from "../../config/dbsql"; 
 import { ConsommationsType } from "./consommations"; 
 
-export namespace ParcellesHelper {
+export namespace ConsommationsHelper {
   
   // insert into Parcelles(adresse,commune,iris) values ('182 avenue roger salengro', 'Villeurbanne','bah iris');
     export const getConsommations = async () : Promise<ConsommationsType[]> => {
@@ -10,7 +10,7 @@ export namespace ParcellesHelper {
         return await executeQuery(sql);
     }
 
-    export const getConsommationById = async (id: number) : Promise<ConsommationsType[]> => {
+    export const getConsommationById = async (id: string) : Promise<ConsommationsType[]> => {
         const sql = `SELECT * FROM Consommations WHERE id = ?`
         return await executeQuery(sql, [id]);
     }
