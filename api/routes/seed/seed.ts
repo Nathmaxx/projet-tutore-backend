@@ -16,10 +16,10 @@ const router = Router();
 
 router.get("/", async(req: Request, res: Response) => {
 
-  const annnee = 2020;
+  const annee = 2019;
   const filteredCommune = ["Lyon 1er Arrondissement", "Lyon 2e Arrondissement", "Lyon 3e Arrondissement", "Lyon 4e Arrondissement", "Lyon 5e Arrondissement", "Lyon 6e Arrondissement", "Lyon 7e Arrondissement", "Lyon 8e Arrondissement", "Lyon 9e Arrondissement"]
 
-  const response = await fetch(`https://data.grandlyon.com/fr/datapusher/ws/rdata/nrj_energie.nrjcad_parcelles_${annnee}/all.json?maxfeatures=-1&start=1&filename=consommations-energetiques-2020-a-parcelle-territoire-metropole-lyon`)
+  const response = await fetch(`https://data.grandlyon.com/fr/datapusher/ws/rdata/nrj_energie.nrjcad_parcelles_${annee}/all.json?maxfeatures=-1&start=1&filename=consommations-energetiques-${annee}-a-parcelle-territoire-metropole-lyon`)
   const data = await response.json();
   
   const Lyon1erArrondissement = data.values
@@ -87,7 +87,7 @@ router.get("/", async(req: Request, res: Response) => {
       majic_annee_logement_recent: element.majic_annee_logement_recent,
       majic_nb_logement_parcelle: element.majic_nb_logement_parcelle,
       majic_surf_habitable_parcelle: element.majic_surf_habitable_parcelle,
-      annee: annnee
+      annee: annee
     }
 
     const logementCreated = await LogementDetailsHelper.createLogementDetails(longementObject);
@@ -97,16 +97,16 @@ router.get("/", async(req: Request, res: Response) => {
     }
 
     const consommationObject: ConsommationsType = {
-    id_parcelle: element.parcelle,
-    conso_elec: element.conso_elec,
-    conso_gaz: element.conso_gaz,
-    conso_rcu: element.conso_rcu,
-    mwh_ef: element.mwh_ef,
-    mwh_ep: element.mwh_ep,
-    pdl_elec: element.pdl_elec,
-    pdl_gaz: element.pdl_gaz,
-    nb_adresses_livrees: element.nb_adresses_livrees,
-    annee: annnee
+      id_parcelle: element.parcelle,
+      conso_elec: element.conso_elec,
+      conso_gaz: element.conso_gaz,
+      conso_rcu: element.conso_rcu,
+      mwh_ef: element.mwh_ef,
+      mwh_ep: element.mwh_ep,
+      pdl_elec: element.pdl_elec,
+      pdl_gaz: element.pdl_gaz,
+      nb_adresses_livrees: element.nb_adresses_livrees,
+      annee: annee
     }
 
     const consommationCreated = await ConsommationsHelper.createConsommation(consommationObject);
@@ -124,7 +124,7 @@ router.get("/", async(req: Request, res: Response) => {
       i_mwh_ep: element.i_mwh_ep,
       i_pdl_elec: element.i_pdl_elec,
       i_pdl_gaz: element.i_pdl_gaz,
-      annee: annnee
+      annee: annee
     }
 
     const consommationIndustrielleCreated = await ConsommationsIndustriellesHelper.createConsommationIndustrielle(consommationIndustrielleObject);
@@ -145,7 +145,7 @@ router.get("/", async(req: Request, res: Response) => {
       r_kwhef_m2: element.r_kwhef_m2,
       r_kwhep_m2: element.r_kwhep_m2,
       r_surface_m2: element.r_surface_m2,
-      annee: annnee
+      annee: annee
     }
 
     const consommationResidentielleCreated = await ConsommationsResidentiellesHelper.createConsommationResidentielle(consommationResidentielleObject);
@@ -163,7 +163,7 @@ router.get("/", async(req: Request, res: Response) => {
       t_mwh_ep: element.mwh_ep,
       t_pdl_elec: element.pdl_elec,
       t_pdl_gaz: element.pdl_gaz,
-      annee: annnee
+      annee: annee
     }
 
     const consommationTertiaireCreated = await ConsommationsTertiairesHelper.createConsommationTertiaires(ConsommationsTertiairesType);
