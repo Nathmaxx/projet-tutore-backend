@@ -16,7 +16,7 @@ const router = Router();
 
 router.get("/", async(req: Request, res: Response) => {
 
-  const annee = 2018;
+  const annee = 2020;
   const filteredCommune = ["Lyon 1er Arrondissement", "Lyon 2e Arrondissement", "Lyon 3e Arrondissement", "Lyon 4e Arrondissement", "Lyon 5e Arrondissement", "Lyon 6e Arrondissement", "Lyon 7e Arrondissement", "Lyon 8e Arrondissement", "Lyon 9e Arrondissement"]
 
   const response = await fetch(`https://data.grandlyon.com/fr/datapusher/ws/rdata/nrj_energie.nrjcad_parcelles_${annee}/all.json?maxfeatures=-1&start=1&filename=consommations-energetiques-${annee}-a-parcelle-territoire-metropole-lyon`)
