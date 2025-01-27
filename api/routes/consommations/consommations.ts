@@ -61,7 +61,7 @@ router.get("/", checkBearerToken, async (req: Request, res: Response) => {
       return;
     }
 
-    const consommations = await ConsommationsHelper.getConsommationsByCommuneAndAnnee(commune, annee);
+    const consommations = await ConsommationsHelper.getConsommationsByAnneeAndCommune(annee, commune);
 
     if (!consommations || consommations.length === 0) {
       res.status(404).json({ error: `No consommations found for commune ${commune} and annee ${annee}` });
