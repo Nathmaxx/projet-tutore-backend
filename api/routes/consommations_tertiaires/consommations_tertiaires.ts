@@ -35,4 +35,24 @@ router.get("/:id", checkBearerToken, async(req: Request, res: Response) => {
   res.status(200).json(parcelle);
 })
 
+//route pour récupérer les consommations tertiaires d'une année donnée
+router.get("/annee/:annee", checkBearerToken, async(req: Request, res: Response) => {
+
+  const annee = parseInt(req.params.annee, 10);
+
+  if(!annee) {
+    res.status(412).json({ error: "annee must be provided" });
+    return;
+  }
+
+  const parcelles = await ConsommationsTertiairesHelper.getConsommationsTertiairesByAnnee(annee);
+
+  if(!parcelles || parcelles.length === 0) {
+    res.status(404).json({ error: `No parcelles found for annee ${annee}` });
+    return;
+  }
+
+  res.status(200).json(parcelles);
+})
+
 export default router;

@@ -26,5 +26,9 @@ export namespace ConsommationsHelper {
         const sql = `UPDATE consommations SET ? WHERE id = ?`
         return await executeQuery(sql, [consommation, id]);
     }
+    export const getConsommationsByannee = async (annee: number) : Promise<ConsommationsType[]> => {
+        const sql = `SELECT * FROM consommations WHERE annee = ?`
+        return await executeQuery(sql, [annee]);
+    }
   }
 

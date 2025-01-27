@@ -24,5 +24,11 @@ export namespace ConsommationsTertiairesHelper {
         const sql = `UPDATE consommations_tertiaires SET ? WHERE id = ?`
         return await executeQuery(sql, [consommation, id]);
     }
+
+    // Récupérer les consommations tertiaires d'une année donnée
+    export const getConsommationsTertiairesByAnnee = async (annee: number) : Promise<ConsommationsTertiairesType[]> => {
+        const sql = `SELECT * FROM consommations_tertiaires WHERE annee = ?`
+        return await executeQuery(sql, [annee]);
+    }
   }
 

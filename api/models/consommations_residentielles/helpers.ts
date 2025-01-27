@@ -24,5 +24,12 @@ export namespace ConsommationsResidentiellesHelper {
         const sql = `UPDATE consommations_residentielles SET ? WHERE id = ?`
         return await executeQuery(sql, [consommation, id]);
     }
+
+    // Récupérer les consommations résidentielles d'une année donnée
+    export const getConsommationsResidentiellesByAnnee = async (annee: number) : Promise<ConsommationsResidentiellesType[]> => {
+        const sql = `SELECT * FROM consommations_residentielles WHERE annee = ?`
+        return await executeQuery(sql, [annee]);
+    }
   }
+
 

@@ -32,7 +32,44 @@ router.get("/", checkBearerToken, async (req: Request, res: Response) => {
   
     res.status(200).json(consommation);
   });
+  
+  router.get("/annee/:annee", checkBearerToken, async (req: Request, res: Response) => {
+    const annee = parseInt(req.params.annee, 10);
 
+    if (!annee) {
+      res.status(412).json({ error: "annee must be provided" });
+      return;
+    }
+
+    const consommations = await ConsommationsHelper.getConsommationsByannee(annee);
+
+    if (!consommations || consommations.length === 0) {
+      res.status(404).json({ error: `No consommations found for annee ${annee}` });
+      return;
+    }
+
+    res.status(200).json(consommations);
+  });
+
+  //route pour recuperer les consommations d'une annee donnée dans une commune donnée
+  router.get("/commune/:commune/annee/:annee", checkBearerToken, async (req: Request, res: Response) => {
+    const commune = req.params.commune;
+    const annee = parseInt(req.params.annee, 10);
+
+    if (!commune || !annee) {
+      res.status(412).json({ error: "commune and annee must be provided" });
+      return;
+    }
+
+    const consommations = await ConsommationsHelper.getConsommationsByCommuneAndAnnee(commune, annee);
+
+    if (!consommations || consommations.length === 0) {
+      res.status(404).json({ error: `No consommations found for commune ${commune} and annee ${annee}` });
+      return;
+    }
+
+    res.status(200).json(consommations);
+  });
   
   export default router;
 

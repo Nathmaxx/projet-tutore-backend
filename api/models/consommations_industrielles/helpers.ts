@@ -25,4 +25,10 @@ export namespace ConsommationsIndustriellesHelper {
     const sql = `UPDATE consommations_industrielles SET ? WHERE id_consommation_industrielle = ?`;
     return await executeQuery(sql, [consommation, id]);
   };
+
+  // Récupérer les consommations industrielles d'une année donnée
+  export const getConsommationsIndustriellesByAnnee = async (annee: number): Promise<ConsommationsIndustriellesType[]> => {
+    const sql = `SELECT * FROM consommations_industrielles WHERE annee = ?`;
+    return await executeQuery(sql, [annee]);
+  };
 }
