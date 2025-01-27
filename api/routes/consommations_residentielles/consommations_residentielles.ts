@@ -54,5 +54,24 @@ router.get("/annee/:annee", checkBearerToken, async(req: Request, res: Response)
 
   res.status(200).json(parcelles);
 })
+// Récupérer les consommations d'une année donnée dans une commune donée 
+router.get("/commune/:commune/annee/:annee", checkBearerToken, async(req: Request, res: Response) => {
 
+  const commune = req.params.commune;
+  const annee = parseInt(req.params.annee, 10);
+
+  if(!commune || !annee) {
+    res.status(412).json({ error: "commune and annee must be provided" });
+    return;
+  }
+
+  const parcelles = await ConsommationsResidentiellesHelper.getConsommationsResidentiellesByCommuneAndAnnee(commune, annee);
+
+  if(!parcelles || parcelles.length === 0) {
+    res.status(404).json({ error: `No parcelles found for commune ${commune} and annee ${annee}` });
+    return;
+  }
+
+  res.status(200).json(parcelles);
+})
 export default router;

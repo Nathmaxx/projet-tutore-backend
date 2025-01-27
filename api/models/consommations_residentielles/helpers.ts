@@ -30,6 +30,12 @@ export namespace ConsommationsResidentiellesHelper {
         const sql = `SELECT * FROM consommations_residentielles WHERE annee = ?`
         return await executeQuery(sql, [annee]);
     }
+
+    // Récupérer les consommations d'une année donnée dans une commune donée 
+    export const getConsommationsResidentiellesByCommuneAndAnnee = async (commune: string,annee: number) : Promise<ConsommationsResidentiellesType[]> => {
+        const sql = `SELECT * FROM consommations_residentielles WHERE annee = ? AND commune = ?`
+        return await executeQuery(sql, [annee, commune]);
+    }
   }
 
 

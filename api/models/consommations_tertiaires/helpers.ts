@@ -30,5 +30,11 @@ export namespace ConsommationsTertiairesHelper {
         const sql = `SELECT * FROM consommations_tertiaires WHERE annee = ?`
         return await executeQuery(sql, [annee]);
     }
+
+    // Récupérer les consommations d'une année donnée dans une commune donée
+    export const getConsommationsTertiairesByCommuneAndAnnee = async (commune: string,annee: number) : Promise<ConsommationsTertiairesType[]> => {
+        const sql = `SELECT * FROM consommations_tertiaires WHERE annee = ? AND commune = ?`
+        return await executeQuery(sql, [annee, commune]);
+    }
   }
 
