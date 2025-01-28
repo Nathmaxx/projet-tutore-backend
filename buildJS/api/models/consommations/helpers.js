@@ -42,4 +42,9 @@ var ConsommationsHelper;
         const sql = `SELECT * FROM consommations WHERE annee = ? AND commune = ?`;
         return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
     });
+    //recuperer les consommations moyennes d'une annee donnée dans une commune donnée 
+    ConsommationsHelper.getConsommationsMoyenneByAnneeAndCommune = (annee, commune) => __awaiter(this, void 0, void 0, function* () {
+        const sql = `SELECT AVG(conso_elec) as conso_elec, AVG(conso_gaz) as conso_gaz, AVG(conso_rcu) as conso_rcu, AVG(mwh_ef) as mwh_ef, AVG(mwh_ep) as mwh_ep, AVG(pdl_elec) as pdl_elec, AVG(pdl_gaz) as pdl_gaz, AVG(nb_adresses_livrees) as nb_adresses_livrees FROM consommations WHERE annee = ? AND commune = ?`;
+        return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
+    });
 })(ConsommationsHelper || (exports.ConsommationsHelper = ConsommationsHelper = {}));

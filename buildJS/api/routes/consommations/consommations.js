@@ -62,4 +62,19 @@ router.get("/commune/:commune/annee/:annee", checkBearerToken_1.checkBearerToken
     }
     res.status(200).json(consommations);
 }));
+//route pour recuperer les consommations moyennes d'une annee donnée dans une commune donnée 
+router.get("/moyenne/commune/:commune/annee/:annee", checkBearerToken_1.checkBearerToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const commune = req.params.commune;
+    const annee = parseInt(req.params.annee, 10);
+    if (!commune || !annee) {
+        res.status(412).json({ error: "commune and annee must be provided" });
+        return;
+    }
+    const consommations = yield helpers_1.ConsommationsHelper.getConsommationsMoyenneByAnneeAndCommune(annee, commune);
+    if (!consommations || consommations.length === 0) {
+        res.status(404).json({ error: `No consommations found for commune ${commune} and annee ${annee}` });
+        return;
+    }
+    res.status(200).json(consommations);
+}));
 exports.default = router;
