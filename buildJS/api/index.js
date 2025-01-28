@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const consommations_1 = __importDefault(require("./routes/consommations/consommations"));
+const parcelles_1 = __importDefault(require("./routes/parcelles/parcelles"));
+const csvToDB_1 = __importDefault(require("./routes/seed/csvToDB"));
+const seed_1 = __importDefault(require("./routes/seed/seed"));
+const consommations_industrielles_1 = __importDefault(require("./routes/consommations_industrielles/consommations_industrielles"));
+const consommations_residentielles_1 = __importDefault(require("./routes/consommations_residentielles/consommations_residentielles"));
+const consommations_tertiaires_1 = __importDefault(require("./routes/consommations_tertiaires/consommations_tertiaires"));
+const router = express_1.default.Router();
+router.use('/consommations', consommations_1.default);
+router.use('/parcelles', parcelles_1.default);
+router.use('/seed', seed_1.default);
+router.use('/read-csv', csvToDB_1.default);
+router.use('/consommations_industrielles', consommations_industrielles_1.default);
+router.use('/consommations_residentielles', consommations_residentielles_1.default);
+router.use('/consommations_tertiaires', consommations_tertiaires_1.default);
+exports.default = router;
