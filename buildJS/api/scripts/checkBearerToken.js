@@ -7,7 +7,7 @@ const checkBearerToken = (req, res, next) => {
     if (typeof header !== "undefined") {
         const bearer = header.split(' ');
         const token = bearer[1];
-        if (token !== `Bearer ${API_KEY}`) {
+        if (token !== `${API_KEY}`) {
             res.status(401).json({ error: "Unauthorized, token invalide" });
             return;
         }

@@ -16,8 +16,7 @@ var ParcellesHelper;
     // insert into parcelles(id_parcelle, adresse,commune,iris) values ("1", '182 avenue roger salengro', 'Villeurbanne','bah iris');
     ParcellesHelper.getParcelles = () => __awaiter(this, void 0, void 0, function* () {
         const sql = `SELECT * FROM parcelles`;
-        const result = yield (0, dbsql_1.executeQuery)(sql);
-        return result.affectedRows > 0;
+        return yield (0, dbsql_1.executeQuery)(sql);
     });
     ParcellesHelper.getParcelleById = (id) => __awaiter(this, void 0, void 0, function* () {
         const sql = `SELECT * FROM parcelles WHERE id_parcelle = ?`;
