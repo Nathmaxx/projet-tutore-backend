@@ -15,9 +15,10 @@ var ParcellesHelper;
 (function (ParcellesHelper) {
     ParcellesHelper.getParcelles = () => __awaiter(this, void 0, void 0, function* () {
         const sql = `
-      SELECT p.*, c.conso_elec, c.conso_gaz, c.surface 
+      SELECT p.*, c.conso_elec, c.conso_gaz, d.majic_surf_habitable_parcelle 
       FROM parcelles p
       LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle
+      LEFT JOIN logement_details d ON p.id_parcelle = d.id_parcelle
     `;
         return yield (0, dbsql_1.executeQuery)(sql);
     });
