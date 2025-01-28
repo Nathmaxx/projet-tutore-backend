@@ -12,6 +12,7 @@ export namespace ParcellesHelper {
     `;
     return await executeQuery(sql);
   }
+  
 
   export const getParcelleById = async (id: number) : Promise<ParcellesType[]> => {
     const sql = `SELECT * FROM parcelles WHERE id_parcelle = ?`
