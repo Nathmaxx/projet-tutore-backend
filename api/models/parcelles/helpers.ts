@@ -11,7 +11,7 @@ export namespace ParcellesHelper {
   }
 
   export const getParcelleById = async (id: number) : Promise<ParcellesType[]> => {
-    const sql = `SELECT * FROM parcelles WHERE id = ?`
+    const sql = `SELECT * FROM parcelles WHERE id_parcelle = ?`
     return await executeQuery(sql, [id]);
   }
 
@@ -21,7 +21,13 @@ export namespace ParcellesHelper {
   }
 
   export const updateParcelle = async (id: string, parcelle: ParcellesType) : Promise<ParcellesType[]> => {
-    const sql = `UPDATE parcelles SET ? WHERE id = ?`
+    const sql = `UPDATE parcelles SET ? WHERE id_parcelle = ?`
     return await executeQuery(sql, [parcelle, id]);
+  }
+
+  export const updateCoordinates = async (id: string, coordinates: any) : Promise<boolean> => {
+    const sql = `UPDATE parcelles SET coordinates = ? WHERE id_parcelle = ?`
+    const result =  await executeQuery(sql, [coordinates, id]);
+    return result.affectedRows > 0;
   }
 }

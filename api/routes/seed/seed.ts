@@ -71,7 +71,7 @@ router.get("/", async(req: Request, res: Response) => {
       commune: element.commune,
       iris: element.iris,
       gid: element.gid,
-      coordinates: '{ "lat": "45.764043", "lng": "4.835659" }'
+      coordinates: '{ "lat": null, "lng": null }'
     }
     
     const parcelleCreated = await ParcellesHelper.createParcelle(parcelleObject);
