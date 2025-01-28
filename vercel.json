@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "projet-tutore-backend",
+  "builds": [
+    { "src": "buildJS/index.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "buildJS/index.js" }
+  ]
+}
