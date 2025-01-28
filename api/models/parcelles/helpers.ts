@@ -3,9 +3,12 @@ import { ParcellesType } from "./parcelles";
 
 export namespace ParcellesHelper {
   
-  // insert into parcelles(id_parcelle, adresse,commune,iris) values ("1", '182 avenue roger salengro', 'Villeurbanne','bah iris');
-  export const getParcelles = async () : Promise<ParcellesType[]> => {
-    const sql = `SELECT * FROM parcelles`
+  export const getParcelles = async () : Promise<any[]> => {
+    const sql = `
+      SELECT p.*, c.conso_elec, c.conso_gaz, c.surface 
+      FROM parcelles p
+      LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle
+    `;
     return await executeQuery(sql);
   }
 
