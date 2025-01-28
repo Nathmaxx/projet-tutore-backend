@@ -13,9 +13,12 @@ exports.ParcellesHelper = void 0;
 const dbsql_1 = require("../../config/dbsql");
 var ParcellesHelper;
 (function (ParcellesHelper) {
-    // insert into parcelles(id_parcelle, adresse,commune,iris) values ("1", '182 avenue roger salengro', 'Villeurbanne','bah iris');
     ParcellesHelper.getParcelles = () => __awaiter(this, void 0, void 0, function* () {
-        const sql = `SELECT * FROM parcelles`;
+        const sql = `
+      SELECT p.*, c.conso_elec, c.conso_gaz, c.surface 
+      FROM parcelles p
+      LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle
+    `;
         return yield (0, dbsql_1.executeQuery)(sql);
     });
     ParcellesHelper.getParcelleById = (id) => __awaiter(this, void 0, void 0, function* () {
