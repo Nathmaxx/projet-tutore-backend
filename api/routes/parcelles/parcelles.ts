@@ -35,4 +35,5 @@ router.get("/:id", checkBearerToken, async(req: Request, res: Response) => {
   res.status(200).json(parcelle);
 })
 
+
 export default router;
