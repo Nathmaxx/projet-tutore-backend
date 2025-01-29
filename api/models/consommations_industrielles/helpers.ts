@@ -44,5 +44,10 @@ export namespace ConsommationsIndustriellesHelper {
                 group by annee
     `;
     return await executeQuery(sql);
-}
+  }
+
+  export const getTotalConsoGaz = async () : Promise<{total: number}[]> => {
+    const sql = `SELECT SUM(i_conso_gaz) as total, annee FROM consommations_industrielles group by annee`;
+    return await executeQuery(sql);
+  }
 }

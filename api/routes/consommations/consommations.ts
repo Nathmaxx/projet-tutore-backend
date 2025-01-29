@@ -105,5 +105,18 @@ router.get('/stat/elec', async (req: Request, res: Response) => {
     labels : ['Residentielles', 'Industrielles', 'Tertiaires']
   });
 })
-  export default router;
+
+router.get('/stat/gaz', async (req: Request, res: Response) => {
+  const consommations_r = await ConsommationsResidentiellesHelper.getTotalConsoGaz();
+  const consommations_i = await ConsommationsIndustriellesHelper.getTotalConsoGaz();
+  const consommations_t = await ConsommationsTertiairesHelper.getTotalConsoGaz();
+
+  res.status(200).json({
+    dataConso : [consommations_r, consommations_i, consommations_t],
+    labels : ['Residentielles', 'Industrielles', 'Tertiaires']
+  });
+})
+
+
+export default router;
 

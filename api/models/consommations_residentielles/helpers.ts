@@ -40,8 +40,12 @@ export namespace ConsommationsResidentiellesHelper {
     export const getTotalConsoElect = async () : Promise<{total: number}[]> => {
         const sql = `SELECT SUM(r_conso_elec) as total, annee
         FROM consommations_residentielles
-        group by annee
-        `
+        group by annee`
+        return await executeQuery(sql);
+    }
+
+    export const getTotalConsoGaz = async () : Promise<{total: number}[]> => {
+        const sql = `SELECT SUM(r_conso_gaz) as total, annee FROM consommations_residentielles group by annee`
         return await executeQuery(sql);
     }
   }

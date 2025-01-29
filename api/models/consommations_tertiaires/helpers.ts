@@ -41,5 +41,10 @@ export namespace ConsommationsTertiairesHelper {
         const sql = `SELECT SUM(t_conso_elec) as total, annee FROM consommations_tertiaires group by annee`
         return await executeQuery(sql);
     }
+
+    export const getTotalConsoGaz = async () : Promise<{total: number}[]> => {
+        const sql = `SELECT SUM(t_conso_gaz) as total, annee FROM consommations_tertiaires group by annee`
+        return await executeQuery(sql);
+    }
   }
 
