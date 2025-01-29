@@ -13,8 +13,13 @@ const express_1 = require("express");
 const helpers_1 = require("../../models/parcelles/helpers");
 const checkBearerToken_1 = require("../../scripts/checkBearerToken");
 const router = (0, express_1.Router)();
-router.get("/", checkBearerToken_1.checkBearerToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const parcelles = yield helpers_1.ParcellesHelper.getParcelles();
+router.get("/annee/:annee", checkBearerToken_1.checkBearerToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const annee = parseInt(req.query.annee, 10);
+    if (!annee) {
+        res.status(400).json({ error: "Annee is required" });
+        return;
+    }
+    const parcelles = yield helpers_1.ParcellesHelper.getParcelles(annee);
     if (!parcelles) {
         res.status(404).json({ error: "No parcelles found" });
         return;
