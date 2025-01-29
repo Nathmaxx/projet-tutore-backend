@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/annee/:annee", checkBearerToken, async(req: Request, res: Response) => {
 
-  const annee = parseInt(req.query.annee as string, 10);
+  const annee = parseInt(req.params.annee as string, 10);
 
   if (!annee) {
     res.status(400).json({ error: "Annee is required" });
@@ -25,7 +25,9 @@ router.get("/annee/:annee", checkBearerToken, async(req: Request, res: Response)
 
 router.get("/:id", checkBearerToken, async(req: Request, res: Response) => {
 
-  const id = parseInt(req.params.id);
+  const { id } = req.params;
+
+  console.log("id", id);
 
   if(!id) {
     res.status(412).json({ error: "Id must be a number or provided" });
