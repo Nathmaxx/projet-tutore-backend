@@ -89,4 +89,21 @@ router.get('/stat/elec', (req, res) => __awaiter(void 0, void 0, void 0, functio
         labels: ['Residentielles', 'Industrielles', 'Tertiaires']
     });
 }));
+router.get('/stat/gaz', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const consommations_r = yield helpers_2.ConsommationsResidentiellesHelper.getTotalConsoGaz();
+    const consommations_i = yield helpers_3.ConsommationsIndustriellesHelper.getTotalConsoGaz();
+    const consommations_t = yield helpers_4.ConsommationsTertiairesHelper.getTotalConsoGaz();
+    res.status(200).json({
+        dataConso: [consommations_r, consommations_i, consommations_t],
+        labels: ['Residentielles', 'Industrielles', 'Tertiaires']
+    });
+}));
+router.get('/stat/elec-gaz-commune', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const consommations = yield helpers_1.ConsommationsHelper.getConsoElecGazCommune();
+    if ((consommations === null || consommations === void 0 ? void 0 : consommations.length) === 0) {
+        res.status(404).json({ error: `No consommations found` });
+        return;
+    }
+    res.status(200).json((0, helpers_1.formatEnergyData)(consommations));
+}));
 exports.default = router;

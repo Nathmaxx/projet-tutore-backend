@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConsommationsHelper = void 0;
+exports.formatEnergyData = formatEnergyData;
 // models/consommations/helpers.ts
 const dbsql_1 = require("../../config/dbsql");
 var ConsommationsHelper;
@@ -47,4 +48,36 @@ var ConsommationsHelper;
         const sql = `SELECT AVG(conso_elec) as conso_elec, AVG(conso_gaz) as conso_gaz, AVG(conso_rcu) as conso_rcu, AVG(mwh_ef) as mwh_ef, AVG(mwh_ep) as mwh_ep, AVG(pdl_elec) as pdl_elec, AVG(pdl_gaz) as pdl_gaz, AVG(nb_adresses_livrees) as nb_adresses_livrees FROM consommations WHERE annee = ? AND commune = ?`;
         return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
     });
+    ConsommationsHelper.getConsoElecGazCommune = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `
+            SELECT 
+                p.commune,
+                c.annee,
+                SUM(c.conso_elec) AS total_conso_elec,
+                SUM(c.conso_gaz) AS total_conso_gaz
+            FROM 
+                consommations c
+            JOIN 
+                parcelles p ON c.id_parcelle = p.id_parcelle
+            GROUP BY 
+                p.commune, c.annee
+            ORDER BY 
+                p.commune, c.annee`;
+        return yield (0, dbsql_1.executeQuery)(sql);
+    });
 })(ConsommationsHelper || (exports.ConsommationsHelper = ConsommationsHelper = {}));
+function formatEnergyData(data) {
+    // Trier les communes dans l'ordre croissant
+    const sortedCommunes = [...new Set(data.map(item => item.commune))].sort();
+    return data.reduce((acc, item) => {
+        if (!acc[item.annee]) {
+            acc[item.annee] = { total_conso_elec: [], total_conso_gaz: [] };
+        }
+        // Trouver l'index de la commune pour l'insérer dans le bon ordre
+        const communeIndex = sortedCommunes.indexOf(item.commune);
+        acc[item.annee].total_conso_elec[communeIndex] = item.total_conso_elec;
+        acc[item.annee].total_conso_gaz[communeIndex] = item.total_conso_gaz;
+        acc.labels = sortedCommunes;
+        return acc;
+    }, {});
+}

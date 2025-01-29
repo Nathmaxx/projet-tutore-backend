@@ -50,4 +50,8 @@ var ConsommationsIndustriellesHelper;
     `;
         return yield (0, dbsql_1.executeQuery)(sql);
     });
+    ConsommationsIndustriellesHelper.getTotalConsoGaz = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `SELECT SUM(i_conso_gaz) as total, annee FROM consommations_industrielles group by annee`;
+        return yield (0, dbsql_1.executeQuery)(sql);
+    });
 })(ConsommationsIndustriellesHelper || (exports.ConsommationsIndustriellesHelper = ConsommationsIndustriellesHelper = {}));

@@ -44,8 +44,11 @@ var ConsommationsResidentiellesHelper;
     ConsommationsResidentiellesHelper.getTotalConsoElect = () => __awaiter(this, void 0, void 0, function* () {
         const sql = `SELECT SUM(r_conso_elec) as total, annee
         FROM consommations_residentielles
-        group by annee
-        `;
+        group by annee`;
+        return yield (0, dbsql_1.executeQuery)(sql);
+    });
+    ConsommationsResidentiellesHelper.getTotalConsoGaz = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `SELECT SUM(r_conso_gaz) as total, annee FROM consommations_residentielles group by annee`;
         return yield (0, dbsql_1.executeQuery)(sql);
     });
 })(ConsommationsResidentiellesHelper || (exports.ConsommationsResidentiellesHelper = ConsommationsResidentiellesHelper = {}));
