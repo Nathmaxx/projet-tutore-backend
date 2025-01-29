@@ -6,9 +6,16 @@ const router = Router();
 
 router.get("/", checkBearerToken, async(req: Request, res: Response) => {
 
-  const parcelles = await ParcellesHelper.getParcelles();
+  const annee = parseInt(req.query.annee as string, 10);
 
-  if(!parcelles) {
+  if (!annee) {
+    res.status(400).json({ error: "Annee is required" });
+    return;
+  }
+
+  const parcelles = await ParcellesHelper.getParcelles(annee);
+
+  if (!parcelles) {
     res.status(404).json({ error: "No parcelles found" });
     return;
   }

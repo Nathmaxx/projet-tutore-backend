@@ -3,14 +3,14 @@ import { ParcellesType } from "./parcelles";
 
 export namespace ParcellesHelper {
   
-  export const getParcelles = async () : Promise<any[]> => {
+  export const getParcelles = async (annee: number) : Promise<any[]> => {
     const sql = `
       SELECT p.*, c.conso_elec, c.conso_gaz, d.majic_surf_habitable_parcelle 
       FROM parcelles p
-      LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle
+      LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle AND c.annee = ?
       LEFT JOIN logement_details d ON p.id_parcelle = d.id_parcelle
     `;
-    return await executeQuery(sql);
+    return await executeQuery(sql, [annee]);
   }
   
 
