@@ -38,7 +38,14 @@ var ConsommationsResidentiellesHelper;
     });
     // Récupérer les consommations d'une année donnée dans une commune donée 
     ConsommationsResidentiellesHelper.getConsommationsResidentiellesByCommuneAndAnnee = (commune, annee) => __awaiter(this, void 0, void 0, function* () {
-        const sql = `SELECT * FROM consommations_residentielles WHERE annee = ? AND commune = ?`;
-        return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
+        const sql = `SELECT * FROM consommations_residentielles WHERE annee = ? AND commune LIKE ?`;
+        return yield (0, dbsql_1.executeQuery)(sql, [annee, `%${commune}%`]);
+    });
+    ConsommationsResidentiellesHelper.getTotalConsoElect = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `SELECT SUM(r_conso_elec) as total, annee
+        FROM consommations_residentielles
+        group by annee
+        `;
+        return yield (0, dbsql_1.executeQuery)(sql);
     });
 })(ConsommationsResidentiellesHelper || (exports.ConsommationsResidentiellesHelper = ConsommationsResidentiellesHelper = {}));

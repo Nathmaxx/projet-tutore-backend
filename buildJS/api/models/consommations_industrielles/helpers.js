@@ -40,7 +40,14 @@ var ConsommationsIndustriellesHelper;
     });
     //recuperer les consommations industrielles d'une annee dans une commune donnée
     ConsommationsIndustriellesHelper.getConsommationsIndustriellesByCommuneAndAnnee = (commune, annee) => __awaiter(this, void 0, void 0, function* () {
-        const sql = `SELECT * FROM consommations_industrielles WHERE annee = ? AND commune = ?`;
-        return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
+        const sql = `SELECT * FROM consommations_industrielles WHERE annee = ? AND commune LIKE ?`;
+        return yield (0, dbsql_1.executeQuery)(sql, [annee, `%${commune}%`]);
+    });
+    ConsommationsIndustriellesHelper.getTotalConsoElect = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `SELECT SUM(i_conso_elec) as total, annee    
+                FROM consommations_industrielles
+                group by annee
+    `;
+        return yield (0, dbsql_1.executeQuery)(sql);
     });
 })(ConsommationsIndustriellesHelper || (exports.ConsommationsIndustriellesHelper = ConsommationsIndustriellesHelper = {}));

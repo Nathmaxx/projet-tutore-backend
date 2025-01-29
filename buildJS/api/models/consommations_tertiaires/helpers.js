@@ -38,7 +38,11 @@ var ConsommationsTertiairesHelper;
     });
     // Récupérer les consommations d'une année donnée dans une commune donée
     ConsommationsTertiairesHelper.getConsommationsTertiairesByCommuneAndAnnee = (commune, annee) => __awaiter(this, void 0, void 0, function* () {
-        const sql = `SELECT * FROM consommations_tertiaires WHERE annee = ? AND commune = ?`;
-        return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
+        const sql = `SELECT * FROM consommations_tertiaires WHERE annee = ? AND commune LIKE ?`;
+        return yield (0, dbsql_1.executeQuery)(sql, [annee, `%${commune}%`]);
+    });
+    ConsommationsTertiairesHelper.getTotalConsoElect = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `SELECT SUM(t_conso_elec) as total, annee FROM consommations_tertiaires group by annee`;
+        return yield (0, dbsql_1.executeQuery)(sql);
     });
 })(ConsommationsTertiairesHelper || (exports.ConsommationsTertiairesHelper = ConsommationsTertiairesHelper = {}));

@@ -39,8 +39,8 @@ var ConsommationsHelper;
     });
     // Récupérer les consommations d'une année donnée dans une commune donnée
     ConsommationsHelper.getConsommationsByAnneeAndCommune = (annee, commune) => __awaiter(this, void 0, void 0, function* () {
-        const sql = `SELECT * FROM consommations WHERE annee = ? AND commune = ?`;
-        return yield (0, dbsql_1.executeQuery)(sql, [annee, commune]);
+        const sql = `SELECT * FROM consommations WHERE annee = ? AND commune LIKE ?`;
+        return yield (0, dbsql_1.executeQuery)(sql, [annee, `%${commune}%`]);
     });
     //recuperer les consommations moyennes d'une annee donnée dans une commune donnée 
     ConsommationsHelper.getConsommationsMoyenneByAnneeAndCommune = (annee, commune) => __awaiter(this, void 0, void 0, function* () {

@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const helpers_1 = require("../../models/consommations/helpers");
 const checkBearerToken_1 = require("../../scripts/checkBearerToken");
+const helpers_2 = require("../../models/consommations_residentielles/helpers");
+const helpers_3 = require("../../models/consommations_industrielles/helpers");
+const helpers_4 = require("../../models/consommations_tertiaires/helpers");
 const router = (0, express_1.Router)();
 router.get("/", checkBearerToken_1.checkBearerToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const consommations = yield helpers_1.ConsommationsHelper.getConsommations();
@@ -76,5 +79,14 @@ router.get("/moyenne/commune/:commune/annee/:annee", checkBearerToken_1.checkBea
         return;
     }
     res.status(200).json(consommations);
+}));
+router.get('/stat/elec', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const consommations_r = yield helpers_2.ConsommationsResidentiellesHelper.getTotalConsoElect();
+    const consommations_i = yield helpers_3.ConsommationsIndustriellesHelper.getTotalConsoElect();
+    const consommations_t = yield helpers_4.ConsommationsTertiairesHelper.getTotalConsoElect();
+    res.status(200).json({
+        dataConso: [consommations_r, consommations_i, consommations_t],
+        labels: ['Residentielles', 'Industrielles', 'Tertiaires']
+    });
 }));
 exports.default = router;

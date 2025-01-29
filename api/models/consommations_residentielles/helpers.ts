@@ -36,6 +36,14 @@ export namespace ConsommationsResidentiellesHelper {
         const sql = `SELECT * FROM consommations_residentielles WHERE annee = ? AND commune LIKE ?`
         return await executeQuery(sql, [annee, `%${commune}%`]);
     }
+
+    export const getTotalConsoElect = async () : Promise<{total: number}[]> => {
+        const sql = `SELECT SUM(r_conso_elec) as total, annee
+        FROM consommations_residentielles
+        group by annee
+        `
+        return await executeQuery(sql);
+    }
   }
 
 
