@@ -14,7 +14,7 @@ const helpers_1 = require("../../models/parcelles/helpers");
 const checkBearerToken_1 = require("../../scripts/checkBearerToken");
 const router = (0, express_1.Router)();
 router.get("/annee/:annee", checkBearerToken_1.checkBearerToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const annee = parseInt(req.query.annee, 10);
+    const annee = parseInt(req.params.annee, 10);
     if (!annee) {
         res.status(400).json({ error: "Annee is required" });
         return;
