@@ -4,7 +4,7 @@ import { checkBearerToken } from "../../scripts/checkBearerToken";
 
 const router = Router();
 
-router.get("/", checkBearerToken, async(req: Request, res: Response) => {
+router.get("/:annee", checkBearerToken, async(req: Request, res: Response) => {
 
   const annee = parseInt(req.query.annee as string, 10);
 
