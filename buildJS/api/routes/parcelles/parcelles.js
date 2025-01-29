@@ -27,7 +27,8 @@ router.get("/annee/:annee", checkBearerToken_1.checkBearerToken, (req, res) => _
     res.status(200).json(parcelles);
 }));
 router.get("/:id", checkBearerToken_1.checkBearerToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = parseInt(req.params.id);
+    const { id } = req.params;
+    console.log("id", id);
     if (!id) {
         res.status(412).json({ error: "Id must be a number or provided" });
         return;

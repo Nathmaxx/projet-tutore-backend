@@ -15,8 +15,11 @@ export namespace ParcellesHelper {
   }
   
 
-  export const getParcelleById = async (id: number) : Promise<ParcellesType[]> => {
-    const sql = `SELECT * FROM parcelles WHERE id_parcelle = ?`
+  export const getParcelleById = async (id: string) : Promise<ParcellesType[]> => {
+    const sql = `SELECT p.* , c.conso_elec, c.conso_gaz, c.annee
+                  FROM parcelles p 
+                  LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle
+                  WHERE p.id_parcelle = ?`
     return await executeQuery(sql, [id]);
   }
 

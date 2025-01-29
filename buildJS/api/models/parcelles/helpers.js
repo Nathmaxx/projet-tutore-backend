@@ -24,7 +24,10 @@ var ParcellesHelper;
         return yield (0, dbsql_1.executeQuery)(sql, [annee]);
     });
     ParcellesHelper.getParcelleById = (id) => __awaiter(this, void 0, void 0, function* () {
-        const sql = `SELECT * FROM parcelles WHERE id_parcelle = ?`;
+        const sql = `SELECT p.* , c.conso_elec, c.conso_gaz, c.annee
+                  FROM parcelles p 
+                  LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle
+                  WHERE p.id_parcelle = ?`;
         return yield (0, dbsql_1.executeQuery)(sql, [id]);
     });
     ParcellesHelper.createParcelle = (parcelle) => __awaiter(this, void 0, void 0, function* () {

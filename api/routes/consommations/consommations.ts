@@ -1,6 +1,9 @@
 import { Response, Request, Router } from "express";
 import { ConsommationsHelper } from "../../models/consommations/helpers";
 import { checkBearerToken } from "../../scripts/checkBearerToken";
+import { ConsommationsResidentiellesHelper } from "../../models/consommations_residentielles/helpers";
+import { ConsommationsIndustriellesHelper } from "../../models/consommations_industrielles/helpers";
+import { ConsommationsTertiairesHelper } from "../../models/consommations_tertiaires/helpers";
 
 const router = Router();
 
@@ -91,5 +94,16 @@ router.get("/", checkBearerToken, async (req: Request, res: Response) => {
     res.status(200).json(consommations);
   });
   
+
+router.get('/stat/elec', async (req: Request, res: Response) => {
+  const consommations_r = await ConsommationsResidentiellesHelper.getTotalConsoElect();
+  const consommations_i = await ConsommationsIndustriellesHelper.getTotalConsoElect();
+  const consommations_t = await ConsommationsTertiairesHelper.getTotalConsoElect();
+
+  res.status(200).json({
+    dataConso : [consommations_r, consommations_i, consommations_t],
+    labels : ['Residentielles', 'Industrielles', 'Tertiaires']
+  });
+})
   export default router;
 
