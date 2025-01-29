@@ -7,8 +7,9 @@ export namespace ParcellesHelper {
     const sql = `
       SELECT p.*, c.conso_elec, c.conso_gaz, d.majic_surf_habitable_parcelle 
       FROM parcelles p
-      LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle AND c.annee = ?
+      LEFT JOIN consommations c ON p.id_parcelle = c.id_parcelle 
       LEFT JOIN logement_details d ON p.id_parcelle = d.id_parcelle
+      WHERE c.annee = ? 
     `;
     return await executeQuery(sql, [annee]);
   }
