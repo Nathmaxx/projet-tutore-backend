@@ -34,7 +34,7 @@ export namespace ConsommationsIndustriellesHelper {
 
   //recuperer les consommations industrielles d'une annee dans une commune donnée
   export const getConsommationsIndustriellesByCommuneAndAnnee = async (commune: string,annee: number): Promise<ConsommationsIndustriellesType[]> => {
-    const sql = `SELECT * FROM consommations_industrielles WHERE annee = ? AND commune = ?`;
-    return await executeQuery(sql, [annee, commune]);
+    const sql = `SELECT * FROM consommations_industrielles WHERE annee = ? AND commune LIKE ?`;
+    return await executeQuery(sql, [annee, `%${commune}%`]);
   };
 }

@@ -33,8 +33,8 @@ export namespace ConsommationsHelper {
 
     // Récupérer les consommations d'une année donnée dans une commune donnée
     export const getConsommationsByAnneeAndCommune = async (annee: number, commune: string) : Promise<ConsommationsType[]> => {
-        const sql = `SELECT * FROM consommations WHERE annee = ? AND commune = ?`
-        return await executeQuery(sql, [annee, commune]);
+        const sql = `SELECT * FROM consommations WHERE annee = ? AND commune LIKE ?`
+        return await executeQuery(sql, [annee, `%${commune}%`]);
     }
 
     //recuperer les consommations moyennes d'une annee donnée dans une commune donnée 
