@@ -106,4 +106,12 @@ router.get('/stat/elec-gaz-commune', (req, res) => __awaiter(void 0, void 0, voi
     }
     res.status(200).json((0, helpers_1.formatEnergyData)(consommations));
 }));
+router.get('/stat/conso-by-year', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const consommations = yield helpers_1.ConsommationsHelper.getTotalConsoGazByYear();
+    if ((consommations === null || consommations === void 0 ? void 0 : consommations.length) === 0) {
+        res.status(404).json({ error: `No consommations found` });
+        return;
+    }
+    res.status(200).json((consommations));
+}));
 exports.default = router;

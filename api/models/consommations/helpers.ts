@@ -60,6 +60,21 @@ export namespace ConsommationsHelper {
                 p.commune, c.annee`
     return await executeQuery(sql);
   }
+
+  export const getTotalConsoGazByYear = async() : Promise<EnergyData[]> => {
+    const sql = `
+            SELECT 
+                c.annee,
+                SUM(c.conso_gaz) AS total_conso_gaz,
+                SUM(c.conso_elec) AS total_conso_elec
+            FROM 
+                consommations c
+            GROUP BY 
+                c.annee
+            ORDER BY 
+                c.annee`
+    return await executeQuery(sql);
+  }
 }
 
 export function formatEnergyData(data: EnergyData[]): FormattedData {

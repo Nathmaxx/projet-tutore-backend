@@ -119,7 +119,7 @@ router.get('/stat/gaz', async (req: Request, res: Response) => {
 })
 
 router.get('/stat/elec-gaz-commune', async (req: Request, res: Response) => {
-  
+
   const consommations = await ConsommationsHelper.getConsoElecGazCommune();
   
   if (consommations?.length === 0) {
@@ -128,6 +128,18 @@ router.get('/stat/elec-gaz-commune', async (req: Request, res: Response) => {
   }
   
   res.status(200).json(formatEnergyData(consommations));
+})
+
+router.get('/stat/conso-by-year', async (req: Request, res: Response) => {
+  
+  const consommations = await ConsommationsHelper.getTotalConsoGazByYear();
+  
+  if (consommations?.length === 0) {
+    res.status(404).json({ error: `No consommations found` });
+    return;
+  }
+  
+  res.status(200).json((consommations));
 })
 
 
