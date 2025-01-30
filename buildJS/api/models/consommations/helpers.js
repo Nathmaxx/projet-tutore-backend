@@ -79,6 +79,24 @@ var ConsommationsHelper;
                 c.annee`;
         return yield (0, dbsql_1.executeQuery)(sql);
     });
+    ConsommationsHelper.consoSurfacce = () => __awaiter(this, void 0, void 0, function* () {
+        const sql = `
+        SELECT 
+          c.annee,
+          SUM(c.conso_elec) AS total_conso_elec,
+          SUM(c.conso_gaz) AS total_conso_gaz,
+          SUM(ld.majic_surf_habitable_parcelle) AS total_majic_surf_habitable_parcelle,
+          SUM(ld.majic_nb_logement_parcelle) AS total_majic_nb_logement_parcelle
+        FROM 
+            consommations c
+        JOIN 
+            logement_details ld ON c.id_parcelle = ld.id_parcelle
+        GROUP BY 
+            c.annee
+        ORDER BY 
+            c.annee;`;
+        return yield (0, dbsql_1.executeQuery)(sql);
+    });
 })(ConsommationsHelper || (exports.ConsommationsHelper = ConsommationsHelper = {}));
 function formatEnergyData(data) {
     // Trier les communes dans l'ordre croissant

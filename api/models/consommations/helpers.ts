@@ -75,6 +75,26 @@ export namespace ConsommationsHelper {
                 c.annee`
     return await executeQuery(sql);
   }
+
+  export const consoSurfacce = async() : Promise<EnergyData[]> => {
+    const sql = `
+        SELECT 
+          c.annee,
+          SUM(c.conso_elec) AS total_conso_elec,
+          SUM(c.conso_gaz) AS total_conso_gaz,
+          SUM(ld.majic_surf_habitable_parcelle) AS total_majic_surf_habitable_parcelle,
+          SUM(ld.majic_nb_logement_parcelle) AS total_majic_nb_logement_parcelle
+        FROM 
+            consommations c
+        JOIN 
+            logement_details ld ON c.id_parcelle = ld.id_parcelle
+        GROUP BY 
+            c.annee
+        ORDER BY 
+            c.annee;`
+
+    return await executeQuery(sql);
+  }
 }
 
 export function formatEnergyData(data: EnergyData[]): FormattedData {

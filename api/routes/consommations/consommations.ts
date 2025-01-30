@@ -142,5 +142,17 @@ router.get('/stat/conso-by-year', async (req: Request, res: Response) => {
   res.status(200).json((consommations));
 })
 
+router.get('/stat/conso-surface', async (req: Request, res: Response) => {
+  
+  const consommations = await ConsommationsHelper.consoSurfacce();
+  
+  if (consommations?.length === 0) {
+    res.status(404).json({ error: `No consommations with surface found` });
+    return;
+  }
+  
+  res.status(200).json((consommations));
+})
+
 
 export default router;
