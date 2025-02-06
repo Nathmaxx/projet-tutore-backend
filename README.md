@@ -1,5 +1,5 @@
-# Backend DataWatt Loyn
-Cette application est le backend de l'application DataWatt Loyn. Elle est développée en Node.js et utilise le framework Express.js.
+# Backend DataWatt Lyon
+Cette application est le backend de l'application DataWatt Lyon. Elle est développée en Node.js et utilise le framework Express.js.
 
 ## Installation
 
